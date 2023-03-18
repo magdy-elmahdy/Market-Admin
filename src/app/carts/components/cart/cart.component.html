@@ -1,0 +1,77 @@
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:900px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="cart-box">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantitiy</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of products"> 
+                            <td><img src="{{item.item.image}}" alt="img" class="img-fluid"></td>
+                            <td>{{item.item.title}}</td>
+                            <td>{{item.item.price}}</td>
+                            <td class="quantity">{{item.quantity}}</td>
+                            <td>{{item.quantity*item.item.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="cart-box" *ngIf="!spinner">
+    <form [formGroup]="form" (ngSubmit)="getStartEndDates()">
+        <div class="row">
+            <div class="col-md-3">
+                <label>start Date</label>
+                <input formControlName="start" type="date" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label>End Date</label>
+                <input formControlName="end" type="date" class="form-control">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-success">Apply</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Date</th>
+                <th>Quantitiy</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cart of carts;let index=index"> 
+                <td></td>
+                <td>{{cart.date | date:"shortDate"}}</td>
+                <td class="quantity">{{cart.products.length}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteCart(cart.id)">Delete</button>
+                    <button class="btn btn-primary mx-1"(click)="view(cart)" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="spinner" class="my-5 text-center">
+    <app-spinner ></app-spinner>
+</div>

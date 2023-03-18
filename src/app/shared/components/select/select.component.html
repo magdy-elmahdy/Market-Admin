@@ -1,0 +1,11 @@
+<!-- ميزه اني اخلي السيلكت لوحدها هي ان اقلل الكود ف الاب وكمان اقدر استعملها في اكتر
+من مكان عن طريق اني اديها التايتل والداتا ال هتتعرض واخد منها الايفنت واديه للاب 
+وبالتالي كده السلسكتايه دي بقت nonStatic -->
+
+<label for=""class="my-1">{{title}} :</label>
+<select class="form-control w-25" (change)="filterCategory($event)" class="form-control">
+    <option value="all" selected *ngIf="all">All</option>
+    <option value="{{option}}" [selected]="option==select" *ngFor="let option of data">{{option}}</option>
+</select>
+
+<!-- [selected] waiting true or False to be Actived -->

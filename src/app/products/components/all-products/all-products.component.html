@@ -1,0 +1,125 @@
+                                    <!-- Add Product Modal -->
+<div class="modal fade px-2" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:900px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form [formGroup]="form" (ngSubmit)="addProdct()">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" formControlName="title" placeholder="title">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Price</label>
+                            <input type="number" class="form-control" formControlName="price" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <app-select [title]="'Select Category'"[select]="form.value.category" [data]="categories"[all]='false' (selectedValue)="filterCategory($event)"></app-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Image</label>
+                            <img src="{{base64}}" alt="">
+                            <input type="file" (change)="getImagePath($event)" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="px-2 my-1">
+                            <label for="">Description</label>
+                            <textarea class="form-control"formControlName="description" placeholder="Type Here .." cols="10" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success my-2 mx-2" [disabled]="!form.valid" type="submit" *ngIf="add">Add Product</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+                                    <!-- Update Product Modal -->
+<div class="modal fade px-2" id="exampleModalTogglee" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:900px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" formControlName="title" placeholder="title">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Price</label>
+                            <input type="number" class="form-control" formControlName="price" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <app-select [title]="'Select Category'"[select]="form.value.category" [data]="categories"[all]='false' (selectedValue)="filterCategory($event)"></app-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="px-2 my-1">
+                            <label for="">Image</label>
+                            <img src="{{base64}}" alt="">
+                            <input type="file" (change)="getImagePath($event)" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="px-2 my-1">
+                            <label for="">Description</label>
+                            <textarea class="form-control"formControlName="description" placeholder="Type Here .." cols="10" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success my-2 mx-2" (click)="updatePro()">Update</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+        <!--View All Products -->
+<div class="main">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-success mt-2"(click)="add=true" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Add Product</button>
+        </div>
+    </div>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products; let i=index">
+                <td><img src="{{product.image}}" alt=""></td>
+                <td>{{product.title}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.price}} L.E</td>
+                <td><button class="btn btn-info my-2" (click)="updateProduct(i)"data-bs-toggle="modal" href="#exampleModalTogglee" role="button">Update</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

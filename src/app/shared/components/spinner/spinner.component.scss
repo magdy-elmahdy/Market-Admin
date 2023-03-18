@@ -1,0 +1,50 @@
+.loader {
+    width: 72px;
+    height: 72px;
+    display: inline-block;
+    position: relative;
+    border: 2px solid #09c;
+    box-sizing: border-box;
+    animation: rotation 2s linear infinite;
+  }
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 2px solid #FF3D00;
+    width: 62px;
+    height: 62px;
+    animation: rotationBack 1.5s linear infinite;
+    transform-origin: center center;
+  }
+  .loader::before {
+    width: 52px;
+    height: 52px;
+    border-color:tomato;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+  @keyframes rotationBack {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+  
